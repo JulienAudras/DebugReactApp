@@ -8,10 +8,17 @@
   &--small {
     width: 274px;
     height: 190px;
+    // Retravail du css pour l'affichage de la mini carte
     .EventCard__imageContainer {
       height: 126px;
+      min-width: 274px;
       min-height: auto;
       overflow: hidden;
+      & img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
     .EventCard__descriptionContainer {
       padding: 0;
