@@ -9,20 +9,35 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-// import { useData } from "../../contexts/DataContext";
-import eventsData from "../../events.json";
-import ModalEvent from "../../containers/ModalEvent";
+import { useData } from "../../contexts/DataContext";
+
+// import eventsData from "../../datas/events.json";
+
+// import LastEventCard from "../../components/LastEventCard";
 
 const Page = () => {
-  const data = eventsData;
-  // Ajout de sorted event qui permet de trier les events par date dans un array
-  const sortedEvents = (data?.events || []).sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    return dateA - dateB;
-  });
+  // const { datas, error } = useData();
+  // console.log("datas = ", datas);
+  // console.log("error = ", error);
 
-  const lastEvent = sortedEvents[sortedEvents.length - 1];
+  // const data = eventsData;
+  // console.log("data = ", data);
+  // Ajout de sorted event qui permet de trier les events par date dans un array
+  // const sortedEvents = (data?.events || []).sort((a, b) => {
+  //   const dateA = new Date(a.date);
+  //   const dateB = new Date(b.date);
+  //   return dateA - dateB;
+  // });
+
+  // const lastEvent = sortedEvents[sortedEvents.length - 1];
+  const { data } = useData();
+
+  const last = data && data.events ? data.events[data.events.length - 1] : null;
+
+  if (!data) {
+    return "loading";
+  }
+
   return (
     <>
       <header>
@@ -32,7 +47,7 @@ const Page = () => {
         <section className="SliderContainer">
           <Slider />
         </section>
-        <section className="ServicesContainer">
+        <section className="ServicesContainer" id="nos-services">
           <h2 className="Title">Nos services</h2>
           <p>Nous organisons des événements sur mesure partout dans le monde</p>
           <div className="ListContainer">
@@ -61,11 +76,11 @@ const Page = () => {
             </ServiceCard>
           </div>
         </section>
-        <section className="EventsContainer">
+        <section className="EventsContainer" id="nos-realisations">
           <h2 className="Title">Nos réalisations</h2>
           <EventList />
         </section>
-        <section className="PeoplesContainer">
+        <section className="PeoplesContainer" id="notre-equipe">
           <h2 className="Title">Notre équipe</h2>
           <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
           <div className="ListContainer">
@@ -123,19 +138,13 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-
-          <Modal Content={<ModalEvent event={lastEvent} />}>
-            {({ setIsOpened }) => (
-              <EventCard
-                onClick={() => setIsOpened(true)}
-                imageSrc={lastEvent.cover}
-                title={lastEvent.title}
-                date={new Date(lastEvent.date)}
-                small
-                label="boom"
-              />
-            )}
-          </Modal>
+          <EventCard
+            imageSrc={last?.cover}
+            title={last?.title}
+            date={new Date(last?.date)}
+            small
+            label="boom"
+          />
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>

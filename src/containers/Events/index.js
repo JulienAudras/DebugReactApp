@@ -13,6 +13,7 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+
   // const filteredEvents = ((!type ? data?.events : data?.events) || []).filter(
   //   (event, index) => {
   //     console.log("Type:", type);
@@ -59,7 +60,6 @@ const EventList = () => {
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
-    console.log("evtType = ", evtType);
     // console.log("Updated type:", type);
   };
 
@@ -69,8 +69,6 @@ const EventList = () => {
   //   const dateB = new Date(b.date);
   //   return dateA - dateB;
   // });
-
-  // const lastEvent = sortedEvents[sortedEvents.length - 1];
 
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
@@ -91,6 +89,7 @@ const EventList = () => {
               <Modal key={event.id} Content={<ModalEvent event={event} />}>
                 {({ setIsOpened }) => (
                   <EventCard
+                    key={event.id}
                     onClick={() => setIsOpened(true)}
                     imageSrc={event.cover}
                     title={event.title}
