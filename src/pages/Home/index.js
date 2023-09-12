@@ -11,25 +11,7 @@ import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
-// import eventsData from "../../datas/events.json";
-
-// import LastEventCard from "../../components/LastEventCard";
-
 const Page = () => {
-  // const { datas, error } = useData();
-  // console.log("datas = ", datas);
-  // console.log("error = ", error);
-
-  // const data = eventsData;
-  // console.log("data = ", data);
-  // Ajout de sorted event qui permet de trier les events par date dans un array
-  // const sortedEvents = (data?.events || []).sort((a, b) => {
-  //   const dateA = new Date(a.date);
-  //   const dateB = new Date(b.date);
-  //   return dateA - dateB;
-  // });
-
-  // const lastEvent = sortedEvents[sortedEvents.length - 1];
   const { data } = useData();
 
   const last = data && data.events ? data.events[data.events.length - 1] : null;

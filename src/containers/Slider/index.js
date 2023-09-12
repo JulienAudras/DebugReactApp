@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { nanoid } from "nanoid";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
 
@@ -24,10 +23,6 @@ const Slider = () => {
     );
   };
 
-  // const handleRadioClick = (radioIdx) => {
-  //   setIndex(radioIdx );
-  // };
-
   useEffect(() => {
     nextCard();
   });
@@ -41,23 +36,19 @@ const Slider = () => {
       {byDateDesc?.map((event, idx) => (
         <>
           <div
-            key={`"slide" + ${event.title}`}
+            key={`slide-${event.title}`}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
           >
-            <img
-              src={event.cover}
-              key={`"image" + ${event.cover}`}
-              alt="forum"
-            />
+            <img src={event.cover} key={`image-${event.cover}`} alt="forum" />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
-                <h3 key={`"titre" + ${event.title}`}>{event.title}</h3>
-                <p key={`"descritpion" + ${event.description}`}>
+                <h3 key={`titre-${event.title}`}>{event.title}</h3>
+                <p key={`descritpion-${event.description}`}>
                   {event.description}
                 </p>
-                <div key={`"date" + ${event.date}`}>
+                <div key={`date-${event.date}`}>
                   {getMonth(new Date(event.date))}
                 </div>
               </div>
@@ -72,13 +63,10 @@ const Slider = () => {
                   name="radio-button"
                   checked={index === radioIdx}
                   onChange={() => {}}
-                  // onClick={() => moveIndex(index + 1)}
-                  // onClick={() => onclick(radioIdx)}
                 />
               ))}
             </div>
           </div>
-          {/* {console.log("radioIdx:", radioIdx)} */}
         </>
       ))}
     </div>
