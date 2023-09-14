@@ -66,7 +66,7 @@ describe("When Events is created", () => {
           <Events />
         </DataProvider>
       );
-      await screen.findByText("Forum #productCON");
+      await screen.findByText("conférence #productCON");
       fireEvent(
         await screen.findByTestId("collapse-button-testid"),
         new MouseEvent("click", {
@@ -106,6 +106,28 @@ describe("When Events is created", () => {
 
       await screen.findByText("24-25-26 Février");
       await screen.findByText("1 site web dédié");
+    });
+  });
+
+  describe("and we click on the next page button", () => {
+    it("the next page is displayed", async () => {
+      api.loadData = jest.fn().mockReturnValue(data);
+      render(
+        <DataProvider>
+          <Events />
+        </DataProvider>
+      );
+      const page2 = screen.getByTestId("page-2");
+
+      fireEvent.click(page2);
+
+      expect(page2).toHaveClass("active");
+
+      const startIndex = screen.getByTestId(
+        "pagination-start-index"
+      ).textContent;
+
+      expect(startIndex).toBe("6");
     });
   });
 });

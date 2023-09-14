@@ -7,6 +7,10 @@ main {
   background-color: $primary;
 }
 
+.hidden {
+  display: none;
+}
+
 .ServicesContainer {
   display: flex;
   flex-direction: column;
@@ -119,6 +123,10 @@ p {
     text-decoration: none;
     display: inline;
     margin: 2px;
+
+    &.active{
+      text-decoration: underline;
+    }
   }
   margin-bottom: 50px;
 }

@@ -9,6 +9,10 @@ import "./style.css";
 
 const PER_PAGE = 9;
 
+function generateUniqueKey(prefix = "id") {
+  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+}
+
 const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
@@ -16,7 +20,11 @@ const EventList = () => {
   const startIndex = (currentPage - 1) * PER_PAGE;
   const endIndex = startIndex + PER_PAGE;
 
-  const allFilteredEvents = (data?.events || []).filter(
+  const byDateDesc = data?.events.sort((evtA, evtB) =>
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
+  );
+
+  const allFilteredEvents = (byDateDesc || []).filter(
     (event) => !type || event.type === type
   );
 
@@ -36,6 +44,12 @@ const EventList = () => {
         "loading"
       ) : (
         <>
+          <div data-testid="pagination-start-index" className="hidden">
+            {startIndex}
+          </div>
+          <div data-testid="pagination-end-index" className="hidden">
+            {endIndex}
+          </div>
           <h3 className="SelectTitle">Catégories</h3>
           <Select
             selection={Array.from(typeList)}
@@ -60,7 +74,13 @@ const EventList = () => {
           <div className="Pagination">
             {[...Array(pageNumber || 0)].map((_, n) => (
               // eslint-disable-next-line react/no-array-index-key
-              <a key={n} href="#events" onClick={() => setCurrentPage(n + 1)}>
+              <a
+                key={generateUniqueKey()}
+                href="#events"
+                data-testid={`page-${n + 1}`}
+                className={n + 1 === currentPage ? "active" : ""}
+                onClick={() => setCurrentPage(n + 1)}
+              >
                 {n + 1}
               </a>
             ))}

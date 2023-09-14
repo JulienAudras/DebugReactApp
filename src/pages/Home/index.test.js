@@ -339,31 +339,12 @@ describe("When Form is created", () => {
     });
   });
 
-  it("a list of fields card is displayed", async () => {
-    //   let dataLoaded = false;
-    //   useData.mockReturnValue({
-    //     data: null,
-    //   });
-    //   await waitFor(() => {
-    //     expect(useData).toHaveBeenCalled(); // Vérifie que useData a été appelé
-
-    //     const result = useData.mock.results[0].value; // Récupère la valeur de useData
-    //     if (result.data) {
-    //       // Si data est défini, les données sont chargées
-    //       dataLoaded = true;
-    //     }
-    //   });
-    //   if (!dataLoaded) {
-    //     // Vous pouvez effectuer des assertions ici en fonction de votre cas d'utilisation.
-    //     // Par exemple, afficher un message d'erreur
-    //     screen.getByText("Erreur de chargement des données");
-    //     // Ou effectuer d'autres actions en cas d'échec du chargement des données.
-    //   }
+  it("a list of fields card is displayed", () => {
     render(<Home />);
-    await screen.findByText("Email");
-    await screen.findByText("Nom");
-    await screen.findByText("Prénom");
-    await screen.findByText("Personel / Entreprise");
+    screen.findByText("Email");
+    screen.findByText("Nom");
+    screen.findByText("Prénom");
+    screen.findByText("Personel / Entreprise");
   });
 
   describe("and a click is triggered on the submit button", () => {
@@ -380,19 +361,29 @@ describe("When Form is created", () => {
       await screen.findByText("Message envoyé !");
     });
   });
-});
+  describe("When a page is created", () => {
+    it("a list of events is displayed", async () => {
+      render(<Home />);
+      await screen.getAllByText("Conférence #productCON");
+    });
 
-describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
-    // to implement
-  });
-  it("a list a people is displayed", () => {
-    // to implement
-  });
-  it("a footer is displayed", () => {
-    // to implement
-  });
-  it("an event card, with the last event, is displayed", () => {
-    // to implement
+    it("a list a people is displayed", () => {
+      render(<Home />);
+      screen.getByText("Samira");
+      screen.getByText("CEO");
+    });
+    it("a footer is displayed and social media's icons are displayed", async () => {
+      render(<Home />);
+      await screen.findByTestId("icon");
+    });
+
+    it("a footer is displayed and the logo is displayed", () => {
+      // render(<Home />);
+      // screen.findByTestId("logo");
+    });
+
+    it("an event card, with the last event, is displayed", () => {
+      // to implement
+    });
   });
 });
