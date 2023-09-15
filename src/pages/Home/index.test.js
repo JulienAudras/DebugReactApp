@@ -6,7 +6,7 @@ jest.mock("../../contexts/DataContext", () => ({
   useData: jest.fn(),
 }));
 
-describe("When Form is created", () => {
+describe("When the page is created", () => {
   beforeEach(() => {
     useData.mockReturnValue({
       data: {
@@ -339,16 +339,66 @@ describe("When Form is created", () => {
     });
   });
 
-  it("a list of fields card is displayed", () => {
-    render(<Home />);
-    screen.findByText("Email");
-    screen.findByText("Nom");
-    screen.findByText("Prénom");
-    screen.findByText("Personel / Entreprise");
+  describe("a menu is displayed", () => {
+    it("and a list of mandatories links and the logo are displayed", async () => {
+      render(<Home />);
+      await screen.findAllByText("Nos services");
+      await screen.findAllByText("Nos réalisations");
+      await screen.findAllByText("Notre équipe");
+      await screen.findAllByText("Contact");
+      await screen.findAllByTestId("logo");
+    });
   });
 
-  describe("and a click is triggered on the submit button", () => {
-    it("the success message is displayed", async () => {
+  describe("a slider is displayed", () => {
+    it("and a list of cards is displayed", async () => {
+      render(<Home />);
+      await screen.findAllByText("World economic forum");
+      await screen.findAllByText("Nordic design week");
+      await screen.findAllByText("Sneakercraze market");
+    });
+  });
+
+  describe("a list of services is displayed", () => {
+    it("and a list of cards is displayed", async () => {
+      render(<Home />);
+      await screen.findByText("Soirée d’entreprise");
+      await screen.findByText("Conférences");
+      await screen.findByText("Experience digitale");
+    });
+  });
+
+  describe("The event section is displayed", () => {
+    it("and a collapse menu is displayed", async () => {
+      render(<Home />);
+      await screen.findByText("Toutes");
+    });
+    it("and a list of cards is displayed", async () => {
+      render(<Home />);
+      await screen.getAllByText("Conférence #productCON");
+    });
+  });
+
+  describe("a list of peoples is displayed", () => {
+    it("and a list of cards is displayed", async () => {
+      render(<Home />);
+      await screen.findByText("Samira");
+      await screen.findByText("CEO");
+      await screen.findByText("Luís");
+      await screen.findByText("Animateur");
+    });
+  });
+
+  describe("a form is displayed", () => {
+    it("and a list of fields card is displayed", () => {
+      render(<Home />);
+      screen.findByText("Email");
+      screen.findByText("Nom");
+      screen.findByText("Prénom");
+      screen.findByText("Personel / Entreprise");
+    });
+
+    it("and if I click on the submit button the success message is displayed", async () => {
       render(<Home />);
       fireEvent(
         await screen.findByText("Envoyer"),
@@ -361,29 +411,18 @@ describe("When Form is created", () => {
       await screen.findByText("Message envoyé !");
     });
   });
-  describe("When a page is created", () => {
-    it("a list of events is displayed", async () => {
-      render(<Home />);
-      await screen.getAllByText("Conférence #productCON");
-    });
 
-    it("a list a people is displayed", () => {
-      render(<Home />);
-      screen.getByText("Samira");
-      screen.getByText("CEO");
-    });
-    it("a footer is displayed and social media's icons are displayed", async () => {
+  describe("a footer is displayed", () => {
+    it("and social media's icons are displayed", async () => {
       render(<Home />);
       await screen.findByTestId("icon");
     });
 
-    it("a footer is displayed and the logo is displayed", () => {
-      // render(<Home />);
-      // screen.findByTestId("logo");
+    it("and the logo is displayed", async () => {
+      render(<Home />);
+      await screen.findAllByTestId("logo");
     });
 
-    it("an event card, with the last event, is displayed", () => {
-      // to implement
-    });
+    it("and an event card, with the last event, is displayed", () => {});
   });
 });

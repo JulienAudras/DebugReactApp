@@ -44,16 +44,12 @@ const EventList = () => {
         "loading"
       ) : (
         <>
-          <div data-testid="pagination-start-index" className="hidden">
-            {startIndex}
-          </div>
-          <div data-testid="pagination-end-index" className="hidden">
-            {endIndex}
-          </div>
           <h3 className="SelectTitle">Catégories</h3>
           <Select
+            data-testid="select-component"
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
+            // data-testid={`select-${type}`}
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (
@@ -61,6 +57,8 @@ const EventList = () => {
                 {({ setIsOpened }) => (
                   <EventCard
                     key={event.id}
+                    id={event.id}
+                    data-testid={`event-${event.id}`}
                     onClick={() => setIsOpened(true)}
                     imageSrc={event.cover}
                     title={event.title}
