@@ -423,6 +423,13 @@ describe("When the page is created", () => {
       await screen.findAllByTestId("logo");
     });
 
-    it("and an event card, with the last event, is displayed", () => {});
+    it("and an event card, with the last event, is displayed", () => {
+      render(<Home />);
+
+      const lastEvent = screen.getByTestId("last-event");
+
+      expect(lastEvent).toBeInTheDocument();
+      expect(lastEvent).toHaveTextContent("Conférence #productCON");
+    });
   });
 });

@@ -130,6 +130,7 @@ const Page = () => {
             date={new Date(last?.date)}
             small
             label="boom"
+            data-testid="last-event"
           />
         </div>
         <div className="col contact">

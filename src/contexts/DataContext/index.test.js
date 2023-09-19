@@ -8,6 +8,7 @@ describe("When a data context is created", () => {
       const { data } = useData();
       return <div>{data?.result}</div>;
     };
+
     render(
       <DataProvider>
         <Component />

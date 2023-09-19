@@ -34,7 +34,7 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={`slide-${event.title}`}>
+        <div key={`slide-${event.title}`} data-testid="slide">
           <div
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
@@ -50,7 +50,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="SlideCard__paginationContainer">
-            <div className="SlideCard__pagination">
+            <div className="SlideCard__pagination" data-testid="radio-button">
               {byDateDesc.map((_, radioIdx) => (
                 <input
                   key={generateUniqueKey("radio")}
