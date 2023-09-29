@@ -319,11 +319,7 @@ const data = {
 describe("When Events is created", () => {
   it("a list of event card is displayed", async () => {
     api.loadData = jest.fn().mockReturnValue(data);
-    render(
-      <DataProvider>
-        <Events />
-      </DataProvider>
-    );
+    render(eventlistComponent);
     await screen.findAllByText("avril");
   });
   describe("and an error occured", () => {

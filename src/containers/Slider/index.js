@@ -5,7 +5,7 @@ import { getMonth } from "../../helpers/Date";
 import "./style.scss";
 
 function generateUniqueKey(prefix = "id") {
-  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+  return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
 const Slider = () => {
@@ -16,20 +16,24 @@ const Slider = () => {
     new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
 
+  // const nextCard = () => {
+  //   setTimeout(
+  //     () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+  //     5000
+  //   );
+  // };
+
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      5000
-    );
+    setTimeout(() => {
+      if (byDateDesc && byDateDesc.length > 0) {
+        setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
+      }
+    }, 5000);
   };
 
   useEffect(() => {
     nextCard();
   });
-
-  if (!data) {
-    return "loading";
-  }
 
   return (
     <div className="SlideCardList">

@@ -49,7 +49,6 @@ const EventList = () => {
             data-testid="select-component"
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
-            // data-testid={`select-${type}`}
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (

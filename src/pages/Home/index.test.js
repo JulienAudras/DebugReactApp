@@ -431,5 +431,22 @@ describe("When the page is created", () => {
       expect(lastEvent).toBeInTheDocument();
       expect(lastEvent).toHaveTextContent("Conférence #productCON");
     });
+    it("and if I click on the last event card, the right modal opens", () => {
+      render(<Home />);
+
+      const lastEvent = screen.getByTestId("last-event");
+
+      fireEvent(
+        lastEvent,
+        new MouseEvent("click", {
+          cancelable: true,
+          bubbles: true,
+        })
+      );
+
+      screen.getByText(
+        "Présentation des outils analytics aux professionnels du secteur"
+      );
+    });
   });
 });
