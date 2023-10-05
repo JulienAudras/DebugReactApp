@@ -78,49 +78,6 @@ describe("When slider is displaying the second card", () => {
   });
 });
 
-// describe("When slider is created and a list card is displayed", () => {
-// it("should display the second slide correctly", async () => {
-//   // Attendez que la deuxième diapositive soit affichée
-//   await waitFor(
-//     () => {
-//       const slides = screen.getAllByTestId("slide");
-//       const secondSlide = slides[1]; // La deuxième slide
-//       const title = secondSlide.querySelector("h3");
-//       const description = secondSlide.querySelector("p");
-
-//       // Vérifiez que le titre et la description de la deuxième slide sont corrects
-//       expect(title).toHaveTextContent("World Gaming Day");
-//       expect(description).toHaveTextContent(
-//         "Evenement mondial autour du gaming"
-//       );
-//     },
-//     { timeout: 6000 }
-//   ); // Ajustez le timeout si nécessaire
-// });
-
-// describe("When slider is displaying the second slide", () => {
-//   beforeEach(async () => {
-//     window.console.error = jest.fn();
-//     api.loadData = jest.fn().mockReturnValue(data);
-//     render(sliderComponent);
-//   });
-
-//   it("The slides are displayed in descending order", async () => {
-//     await waitFor(
-//       () => {
-//         expect(screen.getByText("Nordic design week")).toBeInTheDocument();
-//         expect(
-//           screen.getByText(
-//             "Conférences sur le design de demain dans le digital"
-//           )
-//         ).toBeInTheDocument();
-//         expect(screen.getByText("mars")).toBeInTheDocument();
-//       },
-//       { timeout: 6000 }
-//     );
-//   });
-// });
-
 describe("When slider is created and it is displaying the same number of slides than radio buttons", () => {
   let slides;
   let radioButtons;
